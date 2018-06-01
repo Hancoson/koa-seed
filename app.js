@@ -26,6 +26,7 @@ app.use(views(__dirname + '/views', {
 app.use(route.routes(), route.allowedMethods())
 
 // logger
+
 app.use(async (ctx, next) => {
   const start = Date.now();
   await next();
