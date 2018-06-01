@@ -4,11 +4,14 @@ const static = require('koa-static')
 const views = require('koa-views')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const ejs = require('ejs')
 
 const route = require('./routes/index')
 
+const Config = require('./config/config')
+
 const app = new Koa();
-// middlewares
+// middlewares 数据解析
 app.use(bodyparser({
   enableTypes: ['json', 'form', 'text']
 }))
@@ -16,16 +19,13 @@ app.use(json())
 app.use(logger())
 app.use(static(__dirname + '/public'))
 app.use(views(__dirname + '/views', {
-  root: __dirname + '/views',
-  default: 'hbs',
-  map: { hbs: 'handlebars' }
+  map: { html: 'ejs' }
 }))
 
 // routes
 app.use(route.routes(), route.allowedMethods())
 
 // logger
-
 app.use(async (ctx, next) => {
   const start = Date.now();
   await next();
@@ -33,18 +33,12 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}`);
 });
 
-// response
-
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
-
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
 
-app.listen(3030, () => {
-  console.log('server is running at 3030 port')
+app.listen(Config.port, () => {
+  console.log(`server is running at ${Config.port} port`)
 });
 
