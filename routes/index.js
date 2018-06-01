@@ -5,15 +5,17 @@
  */
 const router = require('koa-router')()
 
+const user = require('./user')
+
 router.get('/', async (ctx, next) => {
-  /* await ctx.render('index', {
-    title: 'Hello Koa 2'
-  }) */
-  //ctx.body = "sdsadasd"
   await ctx.render('index', {
-    title: 'Hello Koa 2'
+    title: 'Hello Koa 2',
+    index: 'index'
   })
 })
+
+
+user(router)
 
 router.all('/*', async (ctx, next) => {
   ctx.response.status = 404;
