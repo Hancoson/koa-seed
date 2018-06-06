@@ -2,4 +2,31 @@
   <p>Hello Word
     <%= index %>
   </p>
+  <p id="get"></p>
+  <p id="post"></p>
+
+  <script>
+    fetch('/api?a=1', {
+      method: 'GET'
+    })
+      .then((res) => {
+        return res.json()
+      })
+      .then((res) => {
+        const _dom = document.getElementById('get')
+        _dom.innerHTML = res.date
+        console.log(res)
+      })
+    fetch('/api/p', {
+      method: 'POST'
+    })
+      .then((res) => {
+        return res.json()
+      })
+      .then((res) => {
+        const _dom = document.getElementById('post')
+        _dom.innerHTML = res.date
+        console.log(res)
+      })
+  </script>
   <% include layout/foot.html %>

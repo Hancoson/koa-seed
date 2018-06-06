@@ -6,6 +6,7 @@
 const router = require('koa-router')()
 
 const user = require('./user')
+const api = require('./api')
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
@@ -16,6 +17,7 @@ router.get('/', async (ctx, next) => {
 
 
 user(router)
+api(router)
 
 router.all('/*', async (ctx, next) => {
   ctx.response.status = 404;

@@ -5,10 +5,6 @@
  */
 const user = (router) => {
   router.get('/user', async (ctx, next) => {
-    /* await ctx.render('index', {
-      title: 'Hello Koa 2'
-    }) */
-    //ctx.body = "sdsadasd"
     await ctx.render('user', {
       title: 'Hello Koa 2',
       index: 'user'
