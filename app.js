@@ -40,6 +40,6 @@ app.on('error', (err, ctx) => {
 });
 
 app.listen(Config.port, () => {
-  console.log(`server is running at ${Config.port} port`)
+  console.log(`server is running http://localhost:3030`)
 });
 
